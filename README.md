@@ -38,25 +38,24 @@ pip install tlib.configuration
 
 We welcome contributions! If you'd like to add features, fix bugs, or improve the documentation, please follow these steps:
 
-1. Fork the repository.
-2. Clone your fork (`git clone https://github.com/<your-username>/tlib.git`)
-3. Create a branch (`git checkout -b feature/your-feature-name`).
-4. Make your changes
- - Follow the coding conventions and guidelines of the repository.
- - Write tests to cover your changes if applicable.
- - Update any relevant documentation.
-5. Commit your changes (`git commit -m "Add feature/bug fix - brief description"`).
-6. Push to your fork (`git push origin feature/your-feature-name`).
-7. Open a pull request.
- - Go to the tlib repository on GitHub and open a pull request from your branch to the `main`.
- - Provide a description of what you’ve done, referencing any relevant issue numbers
-9. Wait for Review
- - The repository maintainers will review your pull request.
- - If any changes are required, make them and push them to your branch
- - If the pull request is accepted, it will be merged into the main branch.
- - Once your pull request is merged, you’ve contributed! Thanks for your support.
+1. **Fork the repository**
+2. **Clone your fork** (`git clone https://github.com/<your-username>/tlib.git`)
+3. **Create a branch** (`git checkout -b feature/your-feature-name`).
+4. **Make your changes**
+   - Follow the coding conventions and guidelines of the repository.
+   - Write tests to cover your changes if applicable.
+   - Update any relevant documentation.
+5. **Commit your changes** (`git commit -m "Add feature/bug fix - brief description"`).
+6. **Push to your fork** (`git push origin feature/your-feature-name`).
+7. **Open a pull request**
+   - Go to the tlib repository on GitHub and open a pull request from your branch to the `main`.
+   - Provide a description of what you’ve done, referencing any relevant issue numbers
+9. **Wait for review**
+   - The repository maintainers will review your pull request.
+   - If any changes are required, make them and push them to your branch
+   - If the pull request is accepted, it will be merged into the main branch.
+   - Once your pull request is merged, you’ve contributed! Thanks for your support.
 
- 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
