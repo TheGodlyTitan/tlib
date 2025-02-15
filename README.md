@@ -9,7 +9,7 @@ This library is designed to be lightweight, customizable, and easy to integrate 
 ### `tlib/configuration`
 The **configuration** module handles loading, modifying, and saving configuration files (e.g., JSON, YAML). It provides a flexible interface for managing configuration settings across different projects.
 
-For more detailed information: [*tlib/configuation*](tlib/configuration/README.md).
+For more detailed information: [*tlib/configuation*](configuration/README.md).
 
 ### `tlib/database` (Coming soon)
 The **database** module will provide tools for connecting to and interacting with databases, with built-in support for managing database configuration through the `tlib/configuration` module. 
