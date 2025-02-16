@@ -41,5 +41,6 @@ class ValidTypedSchema(ConfigSchema):
     )
     
     unique_array = Array(String())
+    datetime_value = Datetime()
     
     

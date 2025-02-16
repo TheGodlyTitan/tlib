@@ -42,5 +42,7 @@ class InvalidTypedSchema(ConfigSchema):
             ("nested_always_float", Float())
         ))
     )
+    
     unique_array = Array(String())
+    datetime_value = Datetime()
     

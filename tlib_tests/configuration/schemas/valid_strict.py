@@ -40,3 +40,5 @@ class ValidStrictSchema(ConfigSchema):
     )
     
     unique_array = Array(String(min_length=8))
+
+    datetime_value = Datetime(format='2025-02-16 09:03:58.374746')
