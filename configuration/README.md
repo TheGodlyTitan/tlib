@@ -148,7 +148,7 @@ except errors.ConfigError as e:
 ```
 
 ## **Module Errors**
-- `ConfigError`:
-- `FileTypeError`:
-- `ConfigParsingError`:
-- `ConfigValidationError`:
+- `ConfigError`: Base exception for module errors.
+- `FileTypeError`: Raised when the configuration file format is not natively supported.
+- `ConfigParsingError`: Raised when a configuration file cannot be parsed due to syntax errors or malformed content.
+- `ConfigValidationError`: Raised when a configuartion file fails to validate from the schema.
