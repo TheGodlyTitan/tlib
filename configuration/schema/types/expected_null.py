@@ -1,7 +1,7 @@
 from typing import Any
 
 
-class ExpectedNull:
+class ExpectedNull(Type):
     """
     A schema type representing an expected `None`/`null` value.
     This type is used to ensure that a key exists but its value must be `None`/`null`.

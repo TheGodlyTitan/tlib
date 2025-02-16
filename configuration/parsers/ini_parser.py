@@ -2,7 +2,7 @@ import pathlib
 import configparser
 from typing import Any
 
-from tlib.config import (
+from tlib.configuration import (
     errors,
     ConfigurationData,
 )

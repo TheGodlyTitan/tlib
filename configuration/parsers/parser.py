@@ -1,7 +1,7 @@
 import abc
 import pathlib
 
-from tlib.config import ConfigurationData
+from tlib.configuration import ConfigurationData
 
 
 class ConfigParser(abc.ABC):
