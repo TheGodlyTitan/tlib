@@ -11,12 +11,12 @@ The **configuration** module handles loading, modifying, and saving configuratio
 
 For more detailed information: [*tlib/configuation*](configuration/README.md).
 
-### `tlib/database` (Coming soon)
-The **database** module will provide tools for connecting to and interacting with databases, with built-in support for managing database configuration through the `tlib/configuration` module. 
+### `tlib/database` (Coming Soon)
+### `tlib/testing` (Coming Soon)
+### `tlib/logging` (Coming Soon)
+### `tlib/cache` (Coming Soon)
 
-This module is currently under development. Stay tuned for updates!
-
-## Installation (Unavailable)
+## Installation (Coming Soon)
 
 You can install **TitanLibrary (tlib)** using pip. You can either install the entire library or individual modules.
 
