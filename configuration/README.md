@@ -26,7 +26,6 @@ flags:
 ```
 ### **Loading Config (app.py)**
 ```py
-# app.py
 from tlib.config import (
     errors,
     load_config, 
