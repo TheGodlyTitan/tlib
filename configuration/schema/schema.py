@@ -51,7 +51,7 @@ class ConfigSchema(abc.ABC):
         Raises
         ------
         ConfigValidationError:
-            fill desc
+            If the data fails to validate; does not follow schema structure. 
         """
 
         key: str
