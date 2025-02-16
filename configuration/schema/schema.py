@@ -1,6 +1,6 @@
 import abc
 
-from tlib.config import (
+from tlib.configuration import (
     errors,
     ConfigurationData
 )
