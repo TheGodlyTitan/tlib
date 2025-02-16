@@ -8,7 +8,8 @@ from tlib.config import (
 from .schemas import (
     ValidTypedSchema,
     InvalidTypedSchema,
-    ValidRestrictionsSchema
+    ValidRestrictionsSchema,
+    MissingKeySchema
 )
 
 
@@ -21,12 +22,15 @@ class TestSchemas(unittest.TestCase):
         self.schema_test = SOURCE_FILES + '/schema_test.yml'
 
     def test_valid_typed_schema(self) -> None:
-        c = load_config(self.schema_test, schema=ValidTypedSchema)
+        load_config(self.schema_test, schema=ValidTypedSchema)
         
     def test_invalid_typed_schema(self) -> None:
         with self.assertRaises(ConfigValidationError):
-            c = load_config(self.schema_test, schema=InvalidTypedSchema)
+            load_config(self.schema_test, schema=InvalidTypedSchema)
     
     def test_valid_restrictions_schema(self) -> None:
-        c = load_config(self.schema_test, schema=ValidRestrictionsSchema)
+        load_config(self.schema_test, schema=ValidRestrictionsSchema)
+
+    def test_missing_key_schema(self) -> None:
+        load_config(self.schema_test, schema=MissingKeySchema)
         

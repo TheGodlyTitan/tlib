@@ -15,8 +15,11 @@ from tlib.config import (
 
 class InvalidTypedSchema(ConfigSchema):
     """
-    An invalid schema implemention: Test raise of ConfigValidationError.
+    An invalid schema implemention.
+    
+    Test raise of ConfigValidationError due to incorrect typing ('always_string').
     """
+
     # Invalid Type: (Should be String())
     always_string = Integer()
 
@@ -45,4 +48,7 @@ class InvalidTypedSchema(ConfigSchema):
     
     unique_array = Array(String())
     datetime_value = Datetime()
+
+    real_path = Filepath()
+    fake_path = Filepath()
     

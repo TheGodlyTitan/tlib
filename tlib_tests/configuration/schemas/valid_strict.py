@@ -9,12 +9,15 @@ from tlib.config import (
     ExpectedNull,
     Nested,
     Array,
+    Filepath
     
 )
 
 class ValidStrictSchema(ConfigSchema):
     """
-    A valid Schema implemention: Tests string restrictions/arguments.
+    A valid Schema implemention.
+
+    Tests string restrictions/arguments. Enforcing an stricter type on the key values.
     """
     always_string = String(min_length=7, max_length=7)
     always_integer = Integer(min_value=10, max_value=10, is_even=True, is_odd=False)
@@ -42,3 +45,6 @@ class ValidStrictSchema(ConfigSchema):
     unique_array = Array(String(min_length=8))
 
     datetime_value = Datetime(format='2025-02-16 09:03:58.374746')
+
+    real_path = Filepath(exists=True, file_extension='.yml')
+    fake_path = Filepath(exists=False)

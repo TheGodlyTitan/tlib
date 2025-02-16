@@ -9,13 +9,16 @@ from tlib.config import (
     ExpectedNull,
     Nested,
     Array,
+    Filepath,
     
 )
 
 
 class ValidTypedSchema(ConfigSchema):
     """
-    A valid schema: Used to test base type values.
+    A valid schema implemention.
+    
+    Tests the base types on the key-values.
     """
     always_string = String()
     always_integer = Integer()
@@ -41,6 +44,10 @@ class ValidTypedSchema(ConfigSchema):
     )
     
     unique_array = Array(String())
+
     datetime_value = Datetime()
+
+    real_path = Filepath()
+    fake_path = Filepath()
     
     

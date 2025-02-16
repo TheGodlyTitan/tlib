@@ -12,3 +12,6 @@ from .nested import Nested
 
 from .expected_null import ExpectedNull
 from .null_or import NullOr
+
+from .datetime import Datetime
+from .filepath import Filepath

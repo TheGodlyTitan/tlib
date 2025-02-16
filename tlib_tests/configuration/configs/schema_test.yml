@@ -27,3 +27,6 @@ unique_array:
   - "item_three"
 
 datetime_value: "2025-02-16 09:03:58.374746"
+
+real_path: "tlib/tests/configuration/configs/schema_test.yml"
+fake_path: "tlib/tests/configuration/configs2"
