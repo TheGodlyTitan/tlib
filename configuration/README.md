@@ -46,7 +46,7 @@ print(config.settings.debug_mode)  # False
 print(config.flags)  # ['flag_one', 'flag_two']
 ```
 ### **Expected Output**
-```py
+```bash
 >>> "TestApp"
 >>> 100
 >>> False
