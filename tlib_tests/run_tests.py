@@ -5,7 +5,7 @@ from unittest import (
     TestLoader,
     TextTestRunner,
 )
-from .results import TestResults
+from .result import TestResult
 
 
 DIRECTORY = "tlib/tlib_tests"
