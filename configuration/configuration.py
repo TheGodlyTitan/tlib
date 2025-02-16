@@ -19,7 +19,6 @@ class Configuration:
         self.__data = data
         self.__path = path
         
-        # Initialize attributes based on the provided configuration data
         for key, value in data.items():
             if isinstance(value, dict):
                 value = Configuration(value)
@@ -91,8 +90,6 @@ class Configuration:
             A dictionary representation of the configuration, including any nested configurations.
         """
         return self.__data
-    
-    #def validate(self, schema: ConfigurationSchema) -> bool:
         
     def __eq__(self, other: object) -> bool:
         """
