@@ -125,7 +125,7 @@ class CustomSchema(ConfigSchema):
         ('max_users', Integer()),
         ('debug_mode', Boolean())
     )
-    flags = Array(String(), elements=2)
+    flags = Array(String(), max_length=2)
 ```
 ### **Class Usage (app.py)**
 ```py
