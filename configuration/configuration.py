@@ -4,7 +4,6 @@ from typing import Any
 from .data import ConfigurationData
 
 
-
 class Configuration:
     """
     A class that represents a configuration with key-value pairs.
