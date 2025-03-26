@@ -1,9 +1,0 @@
-{
-    "app_name": "TestApp",
-    "owner_ids": [1, 2, 3, 4, 5],
-
-    "nested_config": {
-        "version": 1,
-        "other_ids": [1, 2, 3, 4, 5]
-    }
-}

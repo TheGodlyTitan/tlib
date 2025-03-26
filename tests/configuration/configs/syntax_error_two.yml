@@ -1,8 +1,0 @@
-app_name: TestApp
-version: "1.0"
-settings:
-    debug_mode: true
-    max_users: 100
-    timeout: 30.5
-    # list is missing a closing bracket
-    owner_ids: [1, 2, 3
