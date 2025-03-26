@@ -1,12 +1,11 @@
 import pathlib
 import configparser
-from typing import Any
+from typing import Dict, Any
 
-from tlib.configuration import (
+from configuration import (
     errors,
-    ConfigurationData,
+    Parser,
 )
-from .parser import ConfigParser
 
 
 def _convert(value: str) -> Any:
@@ -41,9 +40,9 @@ def _convert(value: str) -> Any:
     # Return the string if no conversion was possible
     return value
         
-class INIParser(ConfigParser):
+class INIParser(Parser):
     """
-    A `ConfigParser` subclass to handle `.ini` configurations.
+    A `Parser` subclass to handle `.ini` configurations.
     
     By default .ini files contain all values as strings, therefore this loader
     contains methods to convert string values into their appropriate types.
@@ -93,13 +92,13 @@ class INIParser(ConfigParser):
     ```
     """
     
-    def parse(source: pathlib.Path) -> ConfigurationData:
+    def parse(file: pathlib.Path) -> Dict[str, Any]:
         """
         Parses configuration from an INI or CFG file and returns it as a dictionary.
 
         Parameters
         ----------
-        source : Path
+        file : Path
             The file path to the INI or CFG configuration file.
 
         Returns
@@ -109,16 +108,16 @@ class INIParser(ConfigParser):
 
         Raises
         ------
-        ConfigParsingError
-            If the file contains syntax errors.
-        ConfigError
-            If the file cannot be accessed or read.
+        ParsingError
+            The file fails to parse due to file syntax errors.
+        SourceError
+            If the source file failed to open.
         """
         
         parser = configparser.ConfigParser()
         
         try:
-            with source.open("r", encoding="utf-8") as file:
+            with file.open("r", encoding="utf-8") as file:
                 parser.read_file(file)
 
             data = {
@@ -132,10 +131,10 @@ class INIParser(ConfigParser):
             return data
         
         except configparser.Error as e:
-            raise errors.ConfigParsingError(source, f"Invalid INI/CFG format: {e}")
+            raise errors.ParsingError(file, str(e))
         
         except (OSError, IOError) as e:
-            raise errors.ConfigError(f"Failed to open {source}: {e}")
+            raise errors.SourceError(file, e)
         
 
 CFGParser = INIParser

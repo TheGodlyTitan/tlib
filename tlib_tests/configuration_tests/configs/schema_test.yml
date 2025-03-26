@@ -1,0 +1,32 @@
+always_string: "TestApp"
+always_integer: 10
+always_float: 10.0
+always_null: null
+
+maybe_string_or_integer: "1"
+maybe_null_or_false: null
+maybe_true_or_false: false
+
+anything_but_null: False
+anything_but_float: 1
+
+nested_one:
+  always_string: "TestApp"
+  always_integer: 10
+  always_float: 10.0
+
+nested_two:
+  sub_nested:
+      nested_always_string: "TestApp"
+      nested_always_integer: 10
+      nested_always_float: 10.0
+
+unique_array:
+  - "item_one"
+  - "item_two"
+  - "item_three"
+  
+datetime_value: "2025-02-16 09:03:58.374746"
+
+real_path: "tlib_tests/configuration_tests/configs/schema_test.yml" # This File
+fake_path: "tlib_tests/configuration_tests/configs/fake_test.yml" # Non-existent File

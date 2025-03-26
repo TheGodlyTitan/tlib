@@ -1,33 +1,31 @@
 import pathlib
 
 
-class ConfigError(Exception):
+class Error(Exception):
     """
-    Base exception for all `configuration` library errors.
+    Base exception for all `configuration` module errors.
     """
     pass
 
-
-class FileTypeError(ConfigError):
+class SourceError(Error):
     """
-    Raised when the configuration file format is not natively supported.
-    Use custom `ConfigParser` classes to parse non-native file types.
+    Raised when a configuration file (source) fails to open or is unsupported.
     """
-    def __init__(self, path: pathlib.Path):
-        super().__init__(f"Unsupported configuration format: {path}")
-
-    
-class ConfigParsingError(ConfigError):
+    def __init__(self, path: pathlib.Path, exception: Exception):
+        super().__init__(f"Configuration source failed to open '{path}': {exception}")
+   
+        
+class ParsingError(Error):
     """
-    Raised when a configuration file cannot be parsed due to syntax errors or malformed content.
+    Raised when a configuration file fails to parse due to incorrect syntax or malformed content.
     """
     def __init__(self, path: pathlib.Path, message: str):
         super().__init__(f"Failed to parse configuration file {path}: {message}")
         
 
-class ConfigValidationError(ConfigError):
+class ValidationError(Error):
     """
-    Raised when a configuartion file fails to validate from the schema.
+    Raised when a configuration file failes the validation of a schema.
     """
     def __init__(self, message: str, key: str, error: Exception = None) -> None:
         super().__init__(f"{message} for key '{key}': {error}")

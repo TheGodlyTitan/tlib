@@ -1,0 +1,4 @@
+app_name: TestApp
+ version: "1.0"  # Incorrect indentation (one extra space)
+settings:
+  debug_mode: true

@@ -1,6 +1,6 @@
 import unittest
 
-from tlib.config import (
+from configuration import (
     load_config,
     Configuration,
     FileTypeError,

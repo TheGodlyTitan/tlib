@@ -2,35 +2,27 @@ import os
 import pathlib
 from typing import Optional
 
-from .data import ConfigurationData
 from .errors import *
 from .parsers import *
-from .schema import ConfigSchema
+from .schema import Schema
 from .configuration import Configuration 
 
 
-__all__ = (
-    'load_config'
-)
-
-data: ConfigurationData
-
-
 def load_config(
-    source: os.PathLike = '.env', 
-    parser: Optional[ConfigParser] = None, 
-    schema: Optional[ConfigSchema] = None
+    path: os.PathLike, 
+    parser: Parser = None, 
+    schema: Schema = None
 ) -> Configuration:
     """
-    Loads a configuration from a specified source and converts it into a Configuration class.
+    Loads a configuration from a specified source path and converts it into a `Configuration` class.
     
     Parameters
     ----------
-    source : PathLike
+    path : PathLike
         The file path or environment variable to load.
-    parser : Optional[ConfigParser]
+    parser : Optional[Parser]
         An optional parser class to handle custom configuration formats.
-    schema : Optional[ConfigSchema]
+    schema : Optional[Schema]
         An optional schema class to handle configuration key/value validation.
         
     Returns
@@ -42,52 +34,46 @@ def load_config(
     ------
     FileNotFoundError
         If the source file does not exist.
-    FileTypeError
+    TypeError
         If the source file type is unsupported.
-    ConfigValidationError
-        If the source data does not match the schema
+    ValidationError
+        If the source data does not match the schema (If given).
     """
     
     # Convert source to Path object if it's a string
-    if isinstance(source, str):
-        source = pathlib.Path(source)
+    if isinstance(path, str):
+        path = pathlib.Path(path)
     
     # Ensure the configuration file exists
-    if not source.exists() or not source.is_file():
-        raise FileNotFoundError(f"Configuration file not found: {source}")
+    if not path.exists() or not path.is_file():
+        raise FileNotFoundError(f"Configuration file not found: {path}")
     
-    # Use custom parser if provided
+    # Parse the data from the source file.
+    # Uses given parser if supplied, otherwise uses built-in parser.
     if parser:
-        data = parser.parse(source)
-        schema._validate(data) if schema else None
-        return Configuration(data, source)
-    
-    # Determine source type based on file extension
-    match source.suffix.lower():
-        
-        case ".env":
-            data = ENVParser.parse(source)
-            
-        case ".yaml" | ".yml":
-            data = YAMLParser.parse(source) # YMLParser.parse(source)
+        data = parser.parse(path)
+    else:
+        # Determine source type based on file extension
+        match path.suffix.lower():
+            case ".yaml" | ".yml":
+                data = YAMLParser.parse(path)
+            case ".json":
+                data = JSONParser.parse(path)         
+            case ".ini":
+                data = INIParser.parse(path)           
+            case ".cfg":
+                data = CFGParser.parse(path)           
+            case ".toml":
+                data = TOMLParser.parse(path)          
+            case _:
+                # Requires end-user to create custom `Parser`.
+                raise SourceError(path, "File type not natively supported.")
 
-        case ".json":
-            data = JSONParser.parse(source)
-        
-        case ".ini":
-            data = INIParser.parse(source)
-        
-        case ".cfg":
-            data = CFGParser.parse(source)
-        
-        case ".toml":
-            data = TOMLParser.parse(source)
-        
-        case _:
-            raise FileTypeError(source)
-    
-    schema._validate(data) if schema else None
-    return Configuration(data, source)
+    # Check the source datas values based on the schema (if any).
+    if schema:
+        schema._validate(data)
+
+    return Configuration(data, path)
 
 
 

@@ -1,7 +1,5 @@
 import pathlib
-from typing import Any
-
-from .data import ConfigurationData
+from typing import Dict, Any
 
 
 class Configuration:
@@ -13,11 +11,16 @@ class Configuration:
     instance attributes, and the class provides methods to retrieve these values or convert 
     the data back into a dictionary.
     """
-    def __init__(self, data: ConfigurationData, path: pathlib.Path = None):
+    def __init__(
+        self, 
+        data: Dict[str, Any], 
+        path: pathlib.Path = None
+    ) -> None:
         
         self.__data = data
         self.__path = path
         
+        # Initialize attributes based on the provided configuration data
         for key, value in data.items():
             if isinstance(value, dict):
                 value = Configuration(value)
@@ -62,11 +65,6 @@ class Configuration:
             The key of the configuration value.
         value : Any
             The value to set for the given key.
-            
-        Raises
-        ------
-        ConfigurationRestrictedError
-            if `cls.CAN_MODIFY` is set to `False`; disabling configuration changes.
         """        
         keys = key.split('.')
         data = self.__data
@@ -79,7 +77,7 @@ class Configuration:
         data[keys[-1]] = value
         setattr(self, keys[-1], Configuration(value) if isinstance(value, dict) else value)
     
-    def to_dict(self) -> ConfigurationData:
+    def to_dict(self) -> Dict[str, Any]:
         """
         Converts the configuration instance back into a dictionary, handling nested configurations.
 

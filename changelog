@@ -1,0 +1,27 @@
+# **tlib/configuration** (v1.1)
+- `schema/types/type.py`: Moved validation check from `Type.__call__()` to `Type.check()`.
+- `parsers/env_parser.py`: Deleted file for ENV saftey concerns.
+- `schema/types/`: Moved types directory to the parent directory `types/`.
+- `parsers/*`: Renamed parameter `Parser.parse(source=)` to `Parser.parse(file=)`.
+- `parsers/parser.py`: Moved abstract parser class to parent directory `parser.py`.
+- `schema/schema.py`: Moved schema class to parent directory `schema.py`.
+- `schema/`: Deleted empty directory.
+
+# **tlib/database** (v1.0.13)
+- `client.py`: Created abstract client class for specific databases.
+- `clients/`: Created directory to contain all `Client` subclasses.
+- `client.py`: Created abstract method `Client.connect()` to hook subclass database connections.
+- `client.py`: Created abstract method `Client.close()` to hook subclass database closes.
+- `client.py`: Created backend method `Client.is_async()` to check if the subclass is asynchronous.
+- `client.py`: Created backend method `Client.is_connected()` to check if the subclass has an active connection.
+- `clients/synchronous/`: Added `SqliteClient` & `PostgresClient` for syncronous database connections.
+- `clients/asynchronous/`: Added `AsyncSqliteClient` & `AsyncPostgresClient` for asyncronous database connections.
+- `errors.py`: Created base module `Error` and `ConnectionError` exceptions.
+- `clients/`: Updated all native clients to raise `ConnectionError` on connection failures.
+- `clients/synchronous/`: Added `MongoClient` for syncronous MongoDB connections.
+- `clients/asynchronous/`: Added `AsyncMongoClient` for asynchronous MongoDB connections.
+- `clients/*/sqlite.py`: Updated `(Async)SqliteClient.connect()` which now checks the `db_file` param to have the correct extensions (`.db`)
+- `clients/asynchronous/`: Renamed files to `async_*.py` format.
+- `clients/*/`: Moved all client subclasses to single `clients/` directory.
+- `errors.py`: Created `InterfaceError` to catch unhandled and unexpected module interface errors.
+

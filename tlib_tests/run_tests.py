@@ -5,10 +5,10 @@ from unittest import (
     TestLoader,
     TextTestRunner,
 )
-from .result import TestResult
+from .formatter import TestResultFormatter
 
 
-DIRECTORY = "tlib/tlib_tests"
+DIRECTORY = "tlib_tests"
 
       
 def run_tests(package: str = None): 
@@ -22,11 +22,14 @@ def run_tests(package: str = None):
         print(f"No tests found in {test_dir}! Check your test files and naming conventions.")
         return
 
+    #runner = unittest.TextTestRunner(verbosity=2)
     runner = TextTestRunner(resultclass=TestResultFormatter, verbosity=0)
+
     runner.run(tests)
 
 
 # Allow running a specific test package via command-line argument
+
 if __name__ == "__main__":
     package = sys.argv[1] if len(sys.argv) > 1 else None
     run_tests(package)

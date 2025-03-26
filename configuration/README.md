@@ -6,10 +6,15 @@ The TLib Configuration package provides a structured, flexible, and efficient wa
 ## **Features**
 - Multi-format support: Easily load YAML, JSON, and other configuration formats.
 - Structured access: Configuration values are accessible via attribute-style access.
-- Custom parsing: Define custom parsers to extend format support.
-- Value schemas: Validate configuration values with typing schemas.
-- Error handling: Provides clear error messages for syntax and loading issues
+- Custom loaders: Create custom loaders to extend format support.
+- Error handling: Provides clear error messages for syntax and loading issues.
+- Strict keys: Define configuration keys and accepted values with schemas.
 
+## **Installation**
+To install the package, use:
+```
+# Currently Unavailable
+```
 
 ## **Basic Usage**
 The core feature of the module is loading a source config file and constructing a `Configuration` object where the keys become the class attributes.
@@ -26,16 +31,17 @@ flags:
 ```
 ### **Loading Config (app.py)**
 ```py
-from tlib.config import (
+# app.py
+from tlib.configuration import (
     errors,
     load_config, 
     Configuration
 )
 
-path = "config.yml"
+PATH = "config.yml"
 
 try:
-    config = load_config(path)
+    config: Configuration = load_config(PATH)
 except errors.ConfigError as e:
     print(f'Failed to load configuration: {e}')
 
@@ -45,7 +51,7 @@ print(config.settings.debug_mode)  # False
 print(config.flags)  # ['flag_one', 'flag_two']
 ```
 ### **Expected Output**
-```bash
+```py
 >>> "TestApp"
 >>> 100
 >>> False
@@ -54,18 +60,18 @@ print(config.flags)  # ['flag_one', 'flag_two']
 
 ## **Custom Parsers**
 Although the module contains multiple file type parsers; you may want to handle your own parsing for your own custom/complex configuration structures.
-The `ConfigParser` class allows you create a parsing handler, which can be passed though the `load_config` function.
+The `Parser` class allows you create a parsing handler, which can be passed though the `load_config` function.
 ### **Class Construction (your_parser.py)**
 ```py
 from pathlib import Path
-from tlib.config import (
-    ConfigParser,
+from tlib.configuration import (
+    Parser,
     ConfigurationData,
     ConfigError,
     ConfigParsingError,
 )
 
-class ABCParser(ConfigParser):
+class ABCParser(Parser):
     def parse(source: Path) -> ConfigurationData:
         try:
             with source.open("r", encoding="utf-8") as file:
@@ -124,7 +130,7 @@ class CustomSchema(ConfigSchema):
         ('max_users', Integer()),
         ('debug_mode', Boolean())
     )
-    flags = Array(String(), max_length=2)
+    flags = Array(String(), elements=2)
 ```
 ### **Class Usage (app.py)**
 ```py
@@ -147,7 +153,7 @@ except errors.ConfigError as e:
 ```
 
 ## **Module Errors**
-- `ConfigError`: Base exception for module errors.
-- `FileTypeError`: Raised when the configuration file format is not natively supported.
-- `ConfigParsingError`: Raised when a configuration file cannot be parsed due to syntax errors or malformed content.
-- `ConfigValidationError`: Raised when a configuartion file fails to validate from the schema.
+- `ConfigError`:
+- `FileTypeError`:
+- `ConfigParsingError`:
+- `ConfigValidationError`:

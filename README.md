@@ -15,6 +15,7 @@ For more detailed information: [*tlib/configuation*](configuration/README.md).
 ### `tlib/testing` (Coming Soon)
 ### `tlib/logging` (Coming Soon)
 ### `tlib/cache` (Coming Soon)
+### `tlib/apis` (Coming Soon)
 
 ## Installation (Coming Soon)
 

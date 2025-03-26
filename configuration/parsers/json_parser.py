@@ -1,24 +1,24 @@
 import json
 import pathlib
+from typing import Dict, Any
 
-from tlib.configuration import (
+from configuration import (
     errors,
-    ConfigurationData,
+    Parser,
 )
-from .parser import ConfigParser
 
 
-class JSONParser(ConfigParser):
+class JSONParser(Parser):
     """
-    A `ConfigParser` subclass to handle `.json` configurations.
+    A `Parser` subclass to handle `.json` configurations.
     """
-    def parse(source: pathlib.Path) -> ConfigurationData:
+    def parse(file: pathlib.Path) -> Dict[str, Any]:
         """"
         Parses configuration from a JSON file and returns it as a dictionary.
         
         Parameters
         ----------
-        source : `Path`
+        file : `Path`
             The file path to the JSON configuration file.
         
         Returns
@@ -28,19 +28,19 @@ class JSONParser(ConfigParser):
         
         Raises
         ------
-        ConfigParsingError
-            If the file is malformed or contains syntax errors.
-        ConfigError
-            If the file cannot be accessed or read.
+        ParsingError
+            The file fails to parse due to file syntax errors.
+        SourceError
+            If the source file failed to open.
         """
         try:
             
-            with source.open("r", encoding="utf-8") as file:
+            with file.open("r", encoding="utf-8") as file:
                 data = json.load(file)
             return data
         
         except json.JSONDecodeError as e:
-            raise errors.ConfigParsingError(source, f"Invalid JSON format: {e}")
+            raise errors.ParsingError(file, str(e))
         
         except (OSError, IOError) as e:
-            raise errors.ConfigError(f"Failed to open {source}: {e}")
+            raise errors.SourceError(file, e)
